@@ -32,7 +32,7 @@ export default function Particles({
   className = "",
   quantity = 30,
   staticity = 50,
-  ease = 50,
+  ease = 60,
   refresh = false,
 }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -68,8 +68,8 @@ export default function Particles({
     const targetAlpha = parseFloat(
       (Math.random() * 0.6 + 0.1).toFixed(1),
     );
-    const dx = (Math.random() - 0.5) * 0.2;
-    const dy = (Math.random() - 0.5) * 0.2;
+    const dx = (Math.random() - 0.5) * 0.3;
+    const dy = (Math.random() - 0.5) * 0.3;
     const magnetism = 0.1 + Math.random() * 4;
 
     return {
