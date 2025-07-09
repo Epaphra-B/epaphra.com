@@ -63,7 +63,7 @@ export default function Particles({
     const { w, h } = canvasSizeRef.current;
     const x = Math.floor(Math.random() * w);
     const y = Math.floor(Math.random() * h);
-    const size = Math.floor(Math.random() * 2) + 0.1;
+    const size = Math.floor(Math.random() * 2) + 0.4;
     const alpha = 0;
     const targetAlpha = parseFloat(
       (Math.random() * 0.6 + 0.1).toFixed(1),
