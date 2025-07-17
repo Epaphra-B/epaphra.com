@@ -1,0 +1,96 @@
+// src/app/components/OrbParticles.module.scss
+// best in chrome
+// Import the math module to use updated functions
+@use "sass:math";
+
+$total: 300; // total particles
+$orb-size: 300px;
+$particle-size: 4px;
+$time: 15s; // Duration for the initial formation animation
+$base-hue: 25; // change for diff colors (180 is nice)
+
+/*
+  Note: Global styles for html, body (like height: 100%, background: black, overflow: hidden)
+  are typically handled in a global CSS file (e.g., globals.css in Next.js) or
+  directly on the body element in your layout.
+  For this module, we'll focus on the component-specific styles.
+*/
+
+.wrap {
+  position: absolute; /* Changed from relative to absolute for better centering with translate */
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d; // Crucial for 3D transformations of children
+  perspective: 1000px; // Adds depth to the 3D scene
+  /* Overall orb rotation:
+   * - 'rotate': keyframe animation for the orb
+   * - '#{$time}': duration
+   * - 'infinite': repeats endlessly
+   * - 'linear': constant speed
+   */
+  animation: rotate #{$time} infinite linear;
+  /* NEW: Center the element using translate */
+  transform: translate(-50%, -50%);
+}
+
+/* Keyframes for the overall orb rotation */
+@keyframes rotate {
+  100% {
+    /* Rotate 360 degrees around Y and X axes for continuous spin */
+    /* Combine with initial translate for proper centering */
+    transform: translate(-50%, -50%) rotateY(360deg) rotateX(360deg);
+  }
+}
+
+.c {
+  position: absolute;
+  width: $particle-size;
+  height: $particle-size;
+  border-radius: 50%; // Makes particles circular
+  opacity: 0; // Particles start invisible
+}
+
+@for $i from 1 through $total {
+  // Use math.random() instead of random()
+  $z: (math.random(360) * 1deg); // random angle to rotateZ
+  $y: (math.random(360) * 1deg); // random to rotateX
+  // Use math.div() instead of / for division
+  $hue: ((math.div(40, $total) * $i) + $base-hue); // set hue
+  
+  .c:nth-child(#{$i}){ // grab the nth particle
+    /* Animation for each particle:
+     * - 'orbit#{$i}': unique keyframe animation for this particle
+     * - '#{$time}': duration of the animation
+     * - 'forwards': retains the styles defined in the last keyframe (100%) after completion
+     */
+    animation: orbit#{$i} #{$time} forwards;
+    /* Stagger the start of each particle's animation for a smoother effect */
+    animation-delay: ($i * .01s);
+    /* Set the background color using HSL (Hue, Saturation, Lightness) */
+    background-color: hsla($hue, 100%, 50%, 1);
+  }
+
+  /* Define the unique keyframe animation for each particle */
+  @keyframes orbit#{$i}{
+    0% {
+      /* Start invisible and at the center (no translateX) */
+      opacity: 0;
+      /* Initial random rotation to distribute particles in 3D space */
+      transform: rotateZ(-#{$z}) rotateY(#{$y}) translateX(0px) rotateZ(#{$z});
+    }
+    30% {
+      /* By 30% of the animation, fade in and move to the orb's radius */
+      opacity: 1; // Fully visible
+      /* Move particle out to the orb's radius */
+      transform: rotateZ(-#{$z}) rotateY(#{$y}) translateX(#{$orb-size}) rotateZ(#{$z});
+    }
+    100% {
+      /* From 30% to 100% (and beyond, due to 'forwards'), hold the orb's position */
+      opacity: 1; // Remain visible
+      /* Hold the particle at the orb's radius */
+      transform: rotateZ(-#{$z}) rotateY(#{$y}) translateX(#{$orb-size}) rotateZ(#{$z});
+    }
+  }
+}
