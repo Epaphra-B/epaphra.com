@@ -121,8 +121,8 @@ export default function updates() {
         {/* Copyright and build info */}
         <div className="text-gray-500 text-xs mt-12 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
         <ul className="flex gap-5">
-            <li>@ 2024 Waitlist Templete</li>
-            <li>Built by Framer</li>
+            <li>@ 2025 All rights reserved</li>
+            <li>epaphra</li>
             <li>404</li>
           </ul>
         </div>
