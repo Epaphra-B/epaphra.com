@@ -8,7 +8,7 @@ export default function HomePage() {
         <OrbParticles />
       <div className="z-10 text-white text-center">
         <h1 className="text-4xl font-bold">Welcome</h1>
-        <p className="mt-2 text-lg">To your animated particle background</p>
+        <p className="mt-2 text-lg">Hello</p>
       </div>
     </main>
   );
