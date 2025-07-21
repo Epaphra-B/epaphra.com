@@ -1,10 +1,6 @@
 "use client";
 
-import React, {
-  useRef,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { useMousePosition } from "../util/mouse";
 
 interface ParticlesProps {
@@ -103,7 +99,6 @@ export default function Particles({
       const canvas = canvasRef.current;
       const context = contextRef.current;
 
-      circlesRef.current.length = 0;
       const w = container.offsetWidth;
       const h = container.offsetHeight;
       canvasSizeRef.current = { w, h };
@@ -113,8 +108,11 @@ export default function Particles({
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
 
-      context.setTransform(1, 0, 0, 1, 0, 0);
-      context.scale(dpr, dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      circlesRef.current = []; // Clear existing particles
+      for (let i = 0; i < quantity; i++) {
+        circlesRef.current.push(createCircle());
+      }
     }
   }, [dpr]);
 
@@ -129,7 +127,7 @@ export default function Particles({
       context.arc(x, y, size, 0, 2 * Math.PI);
       context.fillStyle = `rgba(255, 255, 255, ${alpha})`;
       context.fill();
-      context.setTransform(1, 0, 0, 1, 0, 0);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       if (!update) {
         circlesRef.current.push(circle);
