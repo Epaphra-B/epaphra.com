@@ -9,6 +9,7 @@ interface ParticlesProps {
   staticity?: number;
   ease?: number;
   refresh?: boolean;
+  disableMouseEffect?: boolean; // New prop to disable mouse effects
 }
 
 type Circle = {
@@ -30,6 +31,7 @@ export default function Particles({
   staticity = 50,
   ease = 60,
   refresh = false,
+  disableMouseEffect = false, // Default to false
 }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -114,7 +116,7 @@ export default function Particles({
         circlesRef.current.push(createCircle());
       }
     }
-  }, [dpr]);
+  }, [dpr, quantity, createCircle]); // Added quantity and createCircle to dependency array
 
   const drawCircle = useCallback(
     (circle: Circle, update = false) => {
@@ -133,7 +135,7 @@ export default function Particles({
         circlesRef.current.push(circle);
       }
     },
-    [],
+    [dpr], // Added dpr to dependency array
   );
 
   const drawInitialParticles = useCallback(() => {
@@ -149,8 +151,9 @@ export default function Particles({
     drawInitialParticles();
   }, [resizeCanvas, drawInitialParticles]);
 
+  // Conditional update for mouse position
   const updateMousePosition = useCallback(() => {
-    if (!canvasRef.current) return;
+    if (disableMouseEffect || !canvasRef.current) return; // Exit if disabled or no canvas
     const rect = canvasRef.current.getBoundingClientRect();
     const { w, h } = canvasSizeRef.current;
     const x = mousePosition.x - rect.left - w / 2;
@@ -165,7 +168,7 @@ export default function Particles({
       mouseRef.current.x = x;
       mouseRef.current.y = y;
     }
-  }, [mousePosition]);
+  }, [mousePosition, disableMouseEffect]); // Added disableMouseEffect to dependency array
 
   const startAnimation = useCallback(() => {
     const animate = () => {
@@ -196,16 +199,21 @@ export default function Particles({
 
         circle.x += circle.dx;
         circle.y += circle.dy;
-        circle.translateX +=
-          (mouseRef.current.x /
-            (staticity / circle.magnetism) -
-            circle.translateX) /
-          ease;
-        circle.translateY +=
-          (mouseRef.current.y /
-            (staticity / circle.magnetism) -
-            circle.translateY) /
-          ease;
+
+        // Apply magnetism only if not disabled
+        if (!disableMouseEffect) {
+          circle.translateX +=
+            (mouseRef.current.x /
+              (staticity / circle.magnetism) -
+              circle.translateX) /
+            ease;
+          circle.translateY +=
+            (mouseRef.current.y /
+              (staticity / circle.magnetism) -
+              circle.translateY) /
+            ease;
+        }
+
 
         if (
           circle.x < -circle.size ||
@@ -232,7 +240,7 @@ export default function Particles({
       requestAnimationFrame(animate);
     };
 
-    animate();
+    requestAnimationFrame(animate); // Start the animation
   }, [
     clearCanvas,
     remapValue,
@@ -240,6 +248,7 @@ export default function Particles({
     drawCircle,
     staticity,
     ease,
+    disableMouseEffect, // Added disableMouseEffect to dependency array
   ]);
 
   useEffect(() => {
