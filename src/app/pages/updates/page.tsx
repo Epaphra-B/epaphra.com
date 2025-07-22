@@ -1,8 +1,12 @@
 import Image from "next/image";
+import { Navigation } from "@/app/components/nav";
 
 export default function updates() {
   return (
     <div className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden font-inter">
+      <Navigation />
+
+      {/* Background gradient and image */}
       {/* Tailwind CSS CDN is usually handled by a build process in React,
           but for a self-contained example, we'll assume it's available or
           you'd set it up in your project's index.html or equivalent.
