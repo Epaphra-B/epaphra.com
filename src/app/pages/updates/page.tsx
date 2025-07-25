@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Navigation } from "@/app/components/nav";
 
 export default function updates() {
@@ -78,8 +79,8 @@ export default function updates() {
           <span>Waitlist</span>
         </button>
 
-        {/* Coming Soon! text */}
-        <h1 className="text-6xl md:text-8xl opacity-80 font-bold text-white mb-12 text-center" style={{ textShadow: '0 0 20px rgba(255,255,255,0.5)' }}>
+        {/* Coming Soon! text text-6xl font-extrabold text-transparent bg-clip-text*/}
+        <h1 className="bg-[linear-gradient(173deg,_rgb(255,255,255)_28.4594%,_rgba(3,3,3,0)_108%)] py-3 min-h-fit text-6xl text-transparent bg-clip-text md:text-8xl font-bold mb-12 text-center">
           Coming soon!
         </h1>
 
@@ -101,24 +102,24 @@ export default function updates() {
 
           {/* Social media icons */}
           <div className="flex justify-center space-x-4">
-            <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full frosted-glass hover:bg-gray-700 transition-colors">
+            <Link href="#" className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full frosted-glass hover:bg-gray-700 transition-colors">
               {/* X (Twitter) icon */}
               <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.13l-6.23-8.783-4.714 8.783H1.75L9.292 1.94h2.847L18.244 2.25zM17.292 20l-1.13-1.68H5.962L4.092 20H2.892l7.538-11.196L2.892 4h2.364l4.94 7.39L17.292 4h1.06L10.27 13.116L17.292 20z"></path>
               </svg>
-            </a>
-            <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full frosted-glass hover:bg-gray-700 transition-colors">
+            </Link>
+            <Link href="#" className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full frosted-glass hover:bg-gray-700 transition-colors">
               {/* Facebook icon */}
               <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.505 1.492-3.89 3.776-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C18.343 21.128 22 16.991 22 12z" clipRule="evenodd"></path>
               </svg>
-            </a>
-            <a href="#" className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full frosted-glass hover:bg-gray-700 transition-colors">
+            </Link>
+            <Link href="#" className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full frosted-glass hover:bg-gray-700 transition-colors">
               {/* GitHub icon (assuming this is the third icon based on common social links) */}
               <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path fillRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.86 8.16 6.839 9.488.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.529 2.341 1.088 2.902.829.091-.64.359-1.088.65-1.334-2.22-.253-4.555-1.116-4.555-4.949 0-1.092.39-1.983 1.029-2.675-.103-.253-.446-1.268.099-2.648 0 0 .84-.27 2.75 1.025A9.28 9.28 0 0112 6.878c.85.004 1.705.115 2.504.337 1.909-1.295 2.747-1.025 2.747-1.025.546 1.38.202 2.395.099 2.648.64.692 1.029 1.583 1.029 2.675 0 3.842-2.334 4.691-4.566 4.939.369.319.682.946.682 1.902 0 1.37-.012 2.47-.012 2.801 0 .268.18.577.688.483C19.14 20.16 22 16.418 22 12z" clipRule="evenodd"></path>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -133,7 +134,9 @@ export default function updates() {
       </div>
 
       {/* Large "Waitlist" text in the background, subtle */}
-      <div className="waitlist-bg-text">Waitlist</div>
+      <div>
+        <h1 className="bg-[linear-gradient(118deg,_rgb(255,255,255)_20.4594%,_rgba(3,3,3,0)_100%)] py-3 min-h-fit text-8xl opacity-50 text-transparent bg-clip-text md:text-12xl font-bold mb-12 text-center absolute -bottom-[100px] left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap ">Waitlist</h1>
+      </div>
     </div>
   );
 }
