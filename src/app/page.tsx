@@ -2,10 +2,10 @@
 import React from "react";
 import Particles from "./components/particles";
 
-// const navigation = [
-//   { name: "Projects", href: "pages/updates" },
-//   { name: "Contact", href: "pages/contact" },
-// ];
+const navigation = [
+   { name: "Projects", href: "pages/updates" },
+   { name: "Contact", href: "pages/contact" },
+ ];
 
 export default function Home() {
   return (
@@ -29,7 +29,7 @@ export default function Home() {
         quantity={200}
       />
       <h1 className=" z-10 text-wrap text-4xl text-transparent duration-1000 text-clip bg-[linear-gradient(173deg,_rgb(255,255,255)_28.4594%,_rgba(3,3,3,0)_108%)] cursor-default text-edge-outline animate-title font-calsans sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
-        DVSR Prasad
+        Epaphra
       </h1>
 
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
